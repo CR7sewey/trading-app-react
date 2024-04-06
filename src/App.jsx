@@ -1,17 +1,25 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import StockDetailPage from './pages/StockDetailPage'
+import StockOverviewPage from './pages/StockOverviewPage'
+import NotFound from './pages/NotFound'
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>
-      <div>
-        
-        <h2 className='mt-5'>Hello</h2>
-      </div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<StockOverviewPage />}>
+          </Route>
+          <Route path='/StockDetailPage' element = {<StockDetailPage />}>
+          </Route>
+          <Route path='*' element ={<NotFound />}>
+          </Route>
+        </Routes>
+      </Router>
     </>
   )
 }
