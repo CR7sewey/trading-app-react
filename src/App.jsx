@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<StockOverviewPage />}>
           </Route>
-          <Route path='/StockDetailPage' element = {<StockDetailPage />}>
+          <Route path='/detail/:symbol' element = {<StockDetailPage />}>
           </Route>
           <Route path='*' element ={<NotFound />}>
           </Route>
