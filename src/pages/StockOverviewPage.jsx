@@ -1,9 +1,12 @@
+import AutoComplete from "../components/AutoComplete"
+import StockList from "../components/StockList"
 
 const StockOverviewPage = () => {
     return (
-        <div>
-            Hi there 2!
-        </div>
+        <>
+        <AutoComplete />
+        <StockList />
+        </>
     )
 }
 

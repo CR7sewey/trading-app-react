@@ -6,10 +6,12 @@ import StockOverviewPage from './pages/StockOverviewPage'
 import NotFound from './pages/NotFound'
 
 function App() {
+
+
  
 
   return (
-    <>
+    <main className='container'>
       <Router>
         <Routes>
           <Route path='/' element={<StockOverviewPage />}>
@@ -20,7 +22,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </>
+    </main>
   )
 }
 
