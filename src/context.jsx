@@ -6,10 +6,11 @@ const AppContext = React.createContext();
 //const urlStocks = 'https://finnhub.io/api/v1/quote?'
 const AppProvider = ({ children }) => {
 
-    const [stock, setStock] = useState({});
-    const [watchList, setWatchList] = useState(["AAPL","GOOGL","MSFT","AMZ"]);
+    const [stock, setStock] = useState([]);
+    const [watchList, setWatchList] = useState(["AAPL","GOOGL","MSFT","AMZN"]);
 
     const fetchStocks = async() => {
+        
         let isMounted = true;
         try {
             /*const {data} = await finnHub.get('/quote',{
@@ -17,26 +18,23 @@ const AppProvider = ({ children }) => {
                     symbol: "GOOGL"
                 }
             })*/
-
-            const promises = Promise.all([ // faster than doing a cicle or something like that
-                finnHub.get('/quote',{
-                    params: {
-                        symbol: "GOOGL"
-                    }
-                }),
-                finnHub.get('/quote',{
-                    params: {
-                        symbol: "META"
-                    }
-                }),
-                finnHub.get('/quote',{
-                    params: {
-                        symbol: "AAPL"
-                    }
+            
+            const promises = await Promise.all( // faster than doing a cicle or something like that
+                watchList.map((value) => {
+                    console.log('AQUI4')
+                    return finnHub.get('/quote',{
+                        params: {
+                            symbol: value
+                        }
                 })
-            ]);
+                }));
+
+            const data = promises.map((value) => {
+                return {data: value.data, symbol: value.config.params.symbol}
+            }) //to get an object with data and sigla
+            console.log(data)
             if (isMounted) {
-                setStock(promises);
+                setStock(data);
                 console.log(stock)
             }
            // console.log(data)
@@ -48,6 +46,7 @@ const AppProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        console.log('AQIU')
         fetchStocks()
     }, [])
 
