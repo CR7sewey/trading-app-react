@@ -52,7 +52,7 @@ const AppProvider = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{watchList}} >
+        <AppContext.Provider value={{watchList, stock}} >
             { children }
         </AppContext.Provider>
     )
