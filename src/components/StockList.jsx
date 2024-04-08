@@ -1,4 +1,4 @@
-import { useGlobalContext } from "../context"
+import { useGlobalContext } from "../context/context"
 import {BsFillCaretDownFill, BsFillCaretUpFill} from 'react-icons/bs'
 const StockList = () => {
     const {stock} = useGlobalContext();

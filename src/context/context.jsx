@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import finnHub from "./apis/finnHub";
+import finnHub from "../apis/finnHub";
+
+
 const AppContext = React.createContext();
 
 //https://finnhub.io/docs/api
@@ -48,11 +50,11 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
         console.log('AQIU')
         fetchStocks()
-    }, [])
+    }, [watchList])
 
 
     return (
-        <AppContext.Provider value={{watchList, stock}} >
+        <AppContext.Provider value={{watchList, stock, setWatchList}} >
             { children }
         </AppContext.Provider>
     )
