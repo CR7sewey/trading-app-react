@@ -1,7 +1,16 @@
 import { useGlobalContext } from "../context/context"
 import {BsFillCaretDownFill, BsFillCaretUpFill} from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 const StockList = () => {
     const {stock} = useGlobalContext();
+    const navigate = useNavigate();
+
+    const handleStockSelect = (e) => {
+        //console.log(e.target.innerText)
+        const symbol = e.target.innerText
+        navigate(`/detail/${symbol}`)
+    }
+
     //console.log(watchList)
     return (
         <table className="table hover mt-5">
@@ -20,7 +29,7 @@ const StockList = () => {
         <tbody>
             {stock.map((stockValue) => {
                 return(
-                 <tr className="table-row" key={stockValue.symbol}>
+                 <tr className="table-row" key={stockValue.symbol} onClick={handleStockSelect} style={{cursor: 'pointer'}}>
                  <th scope="row">{stockValue.symbol}</th>
                  <td>{stockValue.data.c}</td>
                  <td className={`${stockValue.data.d >=0 ? "text-success":"text-danger"}`}>{stockValue.data.d} 
