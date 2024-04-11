@@ -2,7 +2,7 @@ import { useGlobalContext } from "../context/context"
 import {BsFillCaretDownFill, BsFillCaretUpFill} from 'react-icons/bs'
 import { useNavigate } from "react-router-dom";
 const StockList = () => {
-    const {stock} = useGlobalContext();
+    const {stock, deleteStock} = useGlobalContext();
     const navigate = useNavigate();
 
     const handleStockSelect = (e) => {
@@ -29,7 +29,7 @@ const StockList = () => {
         <tbody>
             {stock.map((stockValue) => {
                 return(
-                 <tr className="table-row" key={stockValue.symbol} onClick={handleStockSelect} style={{cursor: 'pointer'}}>
+                 <tr className="table-row" key={stockValue.symbol} style={{cursor: 'pointer'}} onClick={handleStockSelect}>
                  <th scope="row">{stockValue.symbol}</th>
                  <td>{stockValue.data.c}</td>
                  <td className={`${stockValue.data.d >=0 ? "text-success":"text-danger"}`}>{stockValue.data.d} 
@@ -39,7 +39,10 @@ const StockList = () => {
                  <td>{stockValue.data.h}</td>
                  <td>{stockValue.data.l}</td>
                  <td>{stockValue.data.o}</td>
-                 <td>{stockValue.data.pc}</td>
+                 <td>{stockValue.data.pc}  <button className="btn btn-danger btn-sm ml-3 d-inline-block delete-button" onClick={(e) => {
+                    e.stopPropagation()
+                    deleteStock(stockValue.symbol)}
+                 }>Remove</button></td>
                  </tr>
             )})}
         </tbody>

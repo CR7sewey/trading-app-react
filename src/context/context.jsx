@@ -9,7 +9,7 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
 
     const [stock, setStock] = useState([]);
-    const [watchList, setWatchList] = useState(["AAPL","GOOGL","MSFT","AMZN"]);
+    const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem('watchStocks')) || ["AAPL","GOOGL","MSFT","AMZN"]);
 
     const fetchStocks = async() => {
         
@@ -50,11 +50,18 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
         console.log('AQIU')
         fetchStocks()
+        localStorage.setItem('watchStocks', JSON.stringify(watchList))
     }, [watchList])
+
+    const deleteStock = (stock) => {
+        setWatchList(watchList.filter((value) => {
+            return value !== stock
+        }))
+    }
 
 
     return (
-        <AppContext.Provider value={{watchList, stock, setWatchList}} >
+        <AppContext.Provider value={{watchList, stock, setWatchList, deleteStock}} >
             { children }
         </AppContext.Provider>
     )
